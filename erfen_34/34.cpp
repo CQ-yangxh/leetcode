@@ -39,12 +39,13 @@ public:
             }
         }
         if (flag){
-            left = mid;
+            if (right == left) return {left, right};
             right = mid;
-            while (nums[left] == target && left >= 0) left--;
-            while (nums[right] == target && right < nums.size()) right++;
-            if (left != 0) left = left + 1;
-            if (right != nums.size() - 1) right = right - 1;
+            left = mid;
+            while (right <= nums.size() - 1 && nums[right] == target) right++; // 处理边界
+            while (left >= 0 && nums[left] == target) left--;
+            right = right - 1;
+            left = left + 1; 
             return {left, right};
         }
         else return {-1, -1};
@@ -52,8 +53,8 @@ public:
 };
 
 int main(){
-    vector<int> nums={1};
-    int target = 1;
+    vector<int> nums={2,2};
+    int target = 2;
     Solution sol;
     vector<int> pos = sol.searchRange(nums, target);
     return 0;
