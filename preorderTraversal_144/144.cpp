@@ -30,6 +30,7 @@ public:
     }
     vector<int> posterIter(TreeNode *root){
         // 54126
+        // 前序遍历，中左右，访问到中了就直接处理，然后要处理左，所以要使右先入栈，左后入栈
         vector<int> res;
         stack<TreeNode *> st;
         if(root == nullptr) return res;
