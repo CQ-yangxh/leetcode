@@ -34,24 +34,22 @@ public:
     string tp_code(string s){
         int maxlength = 0;
         pair<int, int> res;
-        for(int i = 1; i < s.size(); i++){
-            int left = i;
-            int right = s.size() - 1;
-            while(s[left] != s[right] & left < right)
-                right--;
-            if(left >= right) continue;
-            else{
-                int temp_right = right;
+        int maxlen = 0;
+        for(int i = 0; i < s.size(); i++){
+            for(int j = s.size() - 1; j > i; j--)
+            {
+                int left = i;
+                int right = j;
                 while(left < right && s[left] == s[right]){
-                    left++;
-                    right--;
+                        left++;
+                        right--;
                 }
-                if(left >= right && temp_right - i + 1 > maxlength){
-                    left--;
-                    right++;
-                    res.first = i;
-                    res.second = temp_right;
-                    maxlength = temp_right - i + 1;
+                if(left >= right){
+                    if(j - i + 1 > maxlen){
+                        res.first = i;
+                        res.second = j;
+                        maxlen = j - i + 1;
+                    }
                 }
             }
         }
@@ -60,7 +58,7 @@ public:
 };
 
 int main(){
-    string s = "aacabdkacaa";
+    string s = "bb";
     Solution sol;
     // int res = sol.longestPalindromeSubseq(s);
     string substr = sol.tp_code(s);

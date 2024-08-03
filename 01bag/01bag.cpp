@@ -32,7 +32,7 @@ int main(){
     vector<int> value(m);
     for(int i = 0; i < m; i++) cin >> space[i];
     for(int i = 0; i < m; i++) cin >> value[i];
-    
+
     vector<vector<int>> dp(m, vector<int>(n+1, 0));
     // 1. dp[i][j]表示什么：0-i种材料装进背包j中最大的价值
     // 2. dp[i][j] = max(dp[i-1][j], dp[i - 1][j - space[i]] + value[i])  放或者不放
@@ -47,7 +47,7 @@ int main(){
             if(j < space[i]) dp[i][j] = dp[i-1][j];
             else dp[i][j] = max(dp[i-1][j], dp[i-1][j - space[i]] + value[i]);
         }
-    
+
     cout << dp[m-1][n] << endl;
     return 0;
 

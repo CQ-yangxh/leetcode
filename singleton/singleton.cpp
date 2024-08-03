@@ -65,7 +65,7 @@ public:
         // 没有判断，直接返回
         return Instance;
     }
-}
+};
 int main(){
     //懒汉模式
 	lazy_single* singlep1= lazy_single::GetInstance();//通过类域获取接口

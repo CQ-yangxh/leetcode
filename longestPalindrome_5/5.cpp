@@ -19,29 +19,38 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         int n = s.size();
-        int maxlen = 1;
-        string res;
-        vector<vector<int>> dp(n, vector<int>(n, 0));
-        if(n == 1) return s;
-        // dp[i][j]表示从 i 到 j 最长的回文子串
-        // dp[i][j] = dp[i + 1][j - 1] + 2
-        for(int i = 0; i < n; i++) dp[i][i] = 1;
-        for(int i = s.size() - 1; i >= 0; i--){
-            for(int j = i+1; j < s.size(); j++){
-                if(s[i] == s[j]) dp[i][j] = dp[i+1][j-1] + 2;
-                else dp[i][j] = max(dp[i][j-1], dp[i+1][j]);
-                if(dp[i][j] > maxlen){
-                    maxlen = dp[i][j];
-                    res = s.substr(i, j - i + 1);
+        int maxlen = 0;
+        int start;
+        for(int i = 0; i < n; i++){
+            int left = i, right = i;
+            // 单字节
+            while(left >= 0 && right < n && s[left] == s[right]){
+                if(right - left + 1 > maxlen){
+                    maxlen = right - left +1;
+                    start = left;
                 }
+                left--;
+                right++;
+            }
+
+            // 双字节
+            left = i;
+            right = i+1;
+            while(left >= 0 && right < n && s[left] == s[right]){
+                if(right - left + 1 > maxlen){
+                    maxlen = right - left +1;
+                    start = left;
+                }
+                left--;
+                right++;
             }
         }
-        return res;
+        return s.substr(start, maxlen);
     }
 };
 
 int main(){
-    string s = "ac";
+    string s = "cbbd";
     Solution sol;
     string res = sol.longestPalindrome(s);
     return 0;
