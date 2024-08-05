@@ -3,7 +3,7 @@
 using namespace std;
 class Solution {
 public:
-    int maxProfit_gready(vector<int>& prices) {
+    int maxProfit_greedy(vector<int>& prices) {
         priority_queue<int, vector<int>, greater<int>> que;
         int i = 0;
         while(i < prices.size() - 1){
@@ -30,7 +30,7 @@ public:
         if(prices.size() == 0) return 0;
         int n = prices.size();
         vector<vector<int>> dp(n, vector<int>(4, 0));
-        dp[0][0] = -prices[0]; // 第一次持有
+        dp[0][0] = -prices[0]; // 第一次持有股票的现金
         dp[0][1] = 0; // 第一次不持有
         dp[0][2] = -prices[0];
         dp[0][3] = 0;
@@ -45,8 +45,9 @@ public:
 };
 
 int main(){
-    vector<int> prices = {3,3,5,0,0,3,1,4};
+    vector<int> prices = {1,2,4,2,5,7,2,4,9,0};
+    // 3 5 7
     Solution sol;
-    int res = sol.maxProfit(prices);
+    int res = sol.maxProfit_greedy(prices);
     return 0;
 }
