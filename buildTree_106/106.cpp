@@ -19,13 +19,18 @@ public:
         TreeNode* root = new TreeNode(rootval);
         if(postorder.size() == 1) return root;
         int index;
+        // 找到分割点
         for(index = 0; index < inorder.size(); index++){
             if(inorder[index] == rootval) break;
         }
+        // 左子树的中序遍历
         vector<int> leftInorder(inorder.begin(), inorder.begin() + index);
+        // 右子树的中序遍历
         vector<int> rightInorder(inorder.begin() + index + 1, inorder.end());
 
+        // 左子树的后序遍历
         vector<int> leftPostorder(postorder.begin(), postorder.begin() + index);
+        // 右子树的后序遍历
         vector<int> rightPostorder(postorder.begin() + index, postorder.end() - 1);
         root->left = traversal(leftInorder, leftPostorder);
         root->right = traversal(rightInorder, rightPostorder);
